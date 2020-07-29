@@ -3,18 +3,26 @@ const request = require('request');
 fs = require('fs');
 
 
-request('http://www.example.edu', (error, response, body) => {
+//process.stdin
+let args = process.argv.slice(2);
+
+const urlName = args[0];
+const fileToWrite = args[1];
+  
+
+
+request(urlName, (error, response, body) => {
   console.log('error:', error); // Print the error if one occurred
   console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
   console.log('body:', body); // Print the HTML for the Google homepage.
 
-  fs.writeFile('./index.html', body, function (err) {
+  fs.writeFile(fileToWrite, body, function (err) {
     if (err) return console.log(err);
   });
 });
 
 //https://www.google.com/fdsafsafsa.html.
-
+//'http://www.example.edu'
 
 
 
